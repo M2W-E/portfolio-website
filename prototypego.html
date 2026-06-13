@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mukisa Eric Williams — Data Science & Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0b1628;
+      --navy-mid: #162035;
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --accent-glow: rgba(59,130,246,0.12);
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --tag-bg: #f1f5f9;
+      --tag-text: #334155;
+      --green: #10b981;
+      --green-bg: #ecfdf5;
+      --amber: #f59e0b;
+      --amber-bg: #fffbeb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ──────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--navy);
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem 2rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+      z-index: 99;
+      animation: slideDown 0.2s ease-out;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu.active { display: block; }
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .mobile-menu a {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0;
+    }
+
+    /* ── HERO ─────────────────────────── */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 6rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(59,130,246,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .hero-sub {
+      font-size: 1.0625rem;
+      color: #94a3b8;
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); }
+
+    .hero-photo {
+      width: 240px;
+      height: 280px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.1);
+    }
+
+    /* ── SECTIONS ─────────────────────── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      line-height: 1.15;
+    }
+
+    /* ── ABOUT ────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .highlight-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .highlight-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .highlight-card h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.15rem;
+    }
+    .highlight-card span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── BENTO GRID ───────────────────── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      grid-auto-rows: auto;
+    }
+    .bento-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .bento-card:hover {
+      border-color: var(--accent-light);
+      box-shadow: 0 4px 20px rgba(59,130,246,0.06);
+    }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card.tall { grid-row: span 2; }
+    .bento-card.hero-card { grid-column: span 2; grid-row: span 2; }
+
+    .bento-card .card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .card-icon.blue { background: var(--accent-glow); color: var(--accent); }
+    .card-icon.green { background: var(--green-bg); color: var(--green); }
+    .card-icon.amber { background: var(--amber-bg); color: var(--amber); }
+    .bento-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+    .bento-card .card-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .bento-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .bento-card .card-date {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── SKILLS ───────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .skill-pill {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--navy);
+      transition: border-color 0.2s;
+    }
+    .skill-pill:hover { border-color: var(--accent-light); }
+
+    /* ── CERTIFICATES ─────────────────── */
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .cert-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .cert-card .cert-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      margin: 0 auto 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    .cert-card h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+    .cert-card span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ──────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .contact-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--navy);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-links a:hover { color: var(--accent); }
+    .contact-links i { width: 20px; text-align: center; color: var(--accent); }
+
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+    .contact-form h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text);
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .contact-form .btn-primary {
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ── FOOTER ───────────────────────── */
+    footer {
+      background: var(--navy);
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ───────────────────── */
+    @media (max-width: 900px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      .bento-card.hero-card,
+      .bento-card.wide { grid-column: span 2; }
+      .skills-grid { grid-template-columns: repeat(3, 1fr); }
+      .cert-list { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-sub { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .hero-photo { width: 180px; height: 220px; margin: 0 auto; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-card.hero-card,
+      .bento-card.wide,
+      .bento-card.tall { grid-column: span 1; grid-row: span 1; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .cert-list { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Eric Williams</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#involvement">Involvement</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#involvement">Involvement</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">Data Science &amp; Analytics</p>
+        <h1>Mukisa Eric<br>Williams</h1>
+        <p class="hero-sub">
+          Turning messy data into clear decisions. Data science student specializing in machine learning,
+          AI automation, and interactive dashboards — based in Kampala, Uganda.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary"><i class="fa-solid fa-arrow-down"></i> See My Work</a>
+          <a href="#contact" class="btn-ghost"><i class="fa-solid fa-envelope"></i> Get in Touch</a>
+        </div>
+      </div>
+      <img
+        src="WhatsApp Image 2026-06-01 at 7.59.36 AM copy.jpeg"
+        alt="Mukisa Eric Williams"
+        class="hero-photo"
+        loading="eager"
+        width="240"
+        height="280"
+      >
+    </div>
+  </header>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a data science and analytics student based in, Uganda at Uganda Christain University main campus, with a deep passion for transforming raw
+            data into actionable insights. My work spans machine learning, AI automation, and interactive
+            business intelligence always with a focus on practical, real-world impact.
+          </p>
+        </div>
+        <div class="about-highlights">
+          <div class="highlight-card">
+            <div class="highlight-icon"><i class="fa-solid fa-map-pin"></i></div>
+            <div><h4>Kampala, Uganda</h4><span>Central Region</span></div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div><h4>Data Science Student</h4><span>Machine Learning &amp; AI focus</span></div>
+          <div class="highlight-card">
+            <div class="highlight-icon"><i class="fa-solid fa-certificate"></i></div>
+            <div><h4>CCNA networking Certificate</h4><span>Inter-mediate Networking </span></div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ EDUCATION ═══════════ -->
+  <section id="education" style="background:#fff;">
+    <div class="container">
+      <p class="section-label">Education</p>
+      <h2 class="section-title">Academic Journey</h2>
+      <div class="bento-grid">
+        <div class="bento-card hero-card">
+          <div class="card-icon blue"><i class="fa-solid fa-building-columns"></i></div>
+          <span class="card-date">Expected 2028</span>
+          <h4>Bachelor's in Data Science and Analytics</h4>
+          <p class="card-sub">Uganda Christain University Mukono, Uganda</p>
+          <p>
+            Acquring different skills  in data science, data analysis, machine learning, and AI automation. Coursework includes
+            statistical modeling, database systems, Python programming, and business intelligence.
+            Active participant in the university's Robotics and AI chapter.
+          </p>  
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ INVOLVEMENT ═══════════ -->
+
+  <!-- ═══════════ SKILLS ═══════════ -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Toolkit</p>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-pill">Python</div>
+        <div class="skill-pill">SQL</div>
+        <div class="skill-pill">Data Visualization</div>
+        <div class="skill-pill">Microsoft Excel</div>
+        <div class="skill-pill"> Networking</div>
+        <div class="skill-pill">Jupyter</div>
+        <div class="skill-pill">Pandas / NumPy</div>
+        <div class="skill-pill">scikit-learn</div>
+        <div class="skill-pill">Git &amp; GitHub</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CERTIFICATES ═══════════ -->
+  <section id="certificates" style="background:#fff;">
+    <div class="container">
+      <p class="section-label">Credentials</p>
+      <h2 class="section-title">Certificates</h2>
+      <div class="cert-list">
+        <div class="cert-card">
+          <div class="cert-badge"><i class="fa-solid fa-network-wired"></i></div>
+          <h4>CCNA</h4>
+          <span>Cisco </span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge"><i class="fa-brands fa-google"></i></div>
+          <h4>Computer Networking</h4>
+          <span>Coursera — 2026</span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge"><i class="fa-solid fa-brain"></i></div>
+          <h4>Machine Learning </h4>
+          <span>Google Cloud still on going</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's Work Together</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>
+            Looking for data-driven solutions, IT support, or a collaborator on your next project?
+             Reach out and let's discuss
+            how I can help.
+          </p>
+          <ul class="contact-links">
+              <p>Email us directly at: <a href="mailto:mericwilliams133@gmail.com">mericwilliams133@gmail.com</a></p><i class="fa-solid fa-envelope"></i> mericwilliams133@gmail.com</a></li>
+            <li><a href="#"><i class="fa-solid fa-location-dot"></i> Kampala, Central Region, Uganda</a></li>
+            <li><a href="https://www.linkedin.com/in/mukisa-eric-williams-a56137383" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://github.com/M2W-E" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <form class="contact-form" onsubmit="alert('Thank you for your message. I will get back to you shortly.'); return false;">
+          <h4>Send a Message</h4>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <p>&copy; 2026 Mukisa Eric Williams. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ── Mobile Menu Toggle ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
